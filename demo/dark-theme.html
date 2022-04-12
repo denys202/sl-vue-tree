@@ -62,7 +62,7 @@
 
 
                 <template slot="draginfo" slot-scope="{ nodes, cursorPosition}">
-                    {{ couldBeChildInfo(nodes, currentPosition) }}
+                    {{ couldBeChildInfo(nodes, cursorPosition) }}
                 </template>
 
             </sl-vue-tree>
@@ -292,17 +292,17 @@
 
     methods: {
       couldBeChild(selectedNode, cursorPosition) {
-        return this.childNodes2([selectedNode], cursorPosition);
+        return this.couldBeChildInfo([selectedNode], cursorPosition);
       },
-      couldBeChildInfo(nodes, currentPosition) {
-        if (nodes.length === 0 || !currentPosition) {
+      couldBeChildInfo(nodes, cursorPosition) {
+        if (nodes.length === 0 || !cursorPosition) {
           return '';
         }
 
         const tree = this.$refs.slVueTree;
         const currentTarget = nodes[0];
-        const canBeReplaced = !tree.checkNodeIsParent(currentTarget, currentPosition.node);
-        const positionRule = !(currentPosition.node.level === 1 && (['after', 'before'].includes(currentPosition.placement)))
+        const canBeReplaced = !tree.checkNodeIsParent(currentTarget, cursorPosition.node);
+        const positionRule = !(cursorPosition.node.level === 1 && (['after', 'before'].includes(cursorPosition.placement)))
         console.log(canBeReplaced);
         console.log(positionRule);
         return canBeReplaced && positionRule;
