@@ -48,6 +48,10 @@ export default {
     maxScrollSpeed: {
       type: Number,
       default: 20
+    },
+    couldBeChild: {
+      type: Function,
+      default: null
     }
   },
 
@@ -121,7 +125,8 @@ export default {
 
     dragSize() {
       return this.getDraggable().length;
-    }
+    },
+
   },
   methods: {
 
@@ -341,6 +346,7 @@ export default {
 
       this.setCursorPosition({ node: destNode, placement });
 
+      // couldBeChild
       const scrollBottomLine = rootRect.bottom - this.scrollAreaHeight;
       const scrollDownSpeed = (event.clientY - scrollBottomLine) / (rootRect.bottom - scrollBottomLine);
       const scrollTopLine = rootRect.top + this.scrollAreaHeight;
@@ -372,16 +378,12 @@ export default {
         const offsetY = y - $nodeItem.getBoundingClientRect().top;
 
 
-        if (destNode.isLeaf) {
-          placement = offsetY >= nodeHeight / 2 ? 'after' : 'before';
+        if (offsetY <= edgeSize) {
+          placement = 'before';
+        } else if (offsetY >= nodeHeight - edgeSize) {
+          placement = 'after';
         } else {
-          if (offsetY <= edgeSize) {
-            placement = 'before';
-          } else if (offsetY >= nodeHeight - edgeSize) {
-            placement = 'after';
-          } else {
-            placement = 'inside';
-          }
+          placement = 'inside';
         }
       } else {
         const $root = this.getRoot().$el;
@@ -416,7 +418,7 @@ export default {
     },
 
     getNodeEl(path) {
-      this.getRoot().$el.querySelector(`[path="${JSON.stringify(path)}"]`);
+      return this.getRoot().$el.querySelector(`[path="${JSON.stringify(path)}"]`);
     },
 
     getLastNode() {
@@ -501,7 +503,6 @@ export default {
       this.mouseIsDown = true;
     },
 
-
     startScroll(speed) {
       const $root = this.getRoot().$el;
       if (this.scrollSpeed === speed) {
@@ -547,7 +548,7 @@ export default {
       if (!this.cursorPosition) {
         this.stopDrag();
         return;
-      };
+      }
 
 
       const draggingNodes = this.getDraggable();
@@ -560,6 +561,11 @@ export default {
         }
 
         if (this.checkNodeIsParent(draggingNode, this.cursorPosition.node)) {
+          this.stopDrag();
+          return;
+        }
+
+        if (this.couldBeChild && !this.couldBeChild(draggingNode, this.cursorPosition)) {
           this.stopDrag();
           return;
         }
@@ -625,7 +631,6 @@ export default {
       this.stopScroll();
     },
 
-
     getParent() {
       return this.$parent;
     },
@@ -672,7 +677,6 @@ export default {
       });
       return selectedNodes;
     },
-
 
     traverse(
       cb,

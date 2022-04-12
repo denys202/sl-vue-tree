@@ -1,3 +1,7 @@
+This project was forked from sl-vue-tree.
+Some modifications were made:
+Added possibility to add restrictions for drag and drops.
+
 # sl-vue-tree
 
 Customizable draggable tree component for Vue.js

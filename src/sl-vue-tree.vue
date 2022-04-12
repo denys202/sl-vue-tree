@@ -136,7 +136,7 @@
       </div>
 
       <div v-show="isDragging" v-if="isRoot" ref="dragInfo" class="sl-vue-tree-drag-info">
-        <slot name="draginfo">
+        <slot name="draginfo" :nodes="getSelected()" :cursor-position="cursorPosition">
           Items: {{selectionSize}}
         </slot>
       </div>
