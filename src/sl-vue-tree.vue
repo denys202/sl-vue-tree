@@ -9,7 +9,7 @@
     <div ref="nodes" class="sl-vue-tree-nodes-list">
       <div
           class="sl-vue-tree-node" v-for="(node, nodeInd) in nodes"
-          :class="{'sl-vue-tree-selected': node.isSelected, 'sl-vue-tree-is-dragging': node.isDragging }"
+          :class="{'sl-vue-tree-selected': node.isSelected, 'sl-vue-tree-is-dragging': node.isSelected && isDragging }"
       >
         <div
           class="sl-vue-tree-cursor sl-vue-tree-cursor_before"
