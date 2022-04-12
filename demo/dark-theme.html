@@ -77,7 +77,7 @@
   var nodes = [{
     "title": "home",
     "isLeaf": false,
-    "isSelectable": true,
+    "isSelectable": false,
     "isDraggable": false,
     "data": {
       "active": true,
@@ -88,8 +88,11 @@
         "view": "https://prestashop178.denys.tot/bb/index.php?controller=AdminProtothemeeditorLocationMolecule&token=2df320a8d017cd4713eda359e69d6ed9&id_molecule=24&viewprotothemeeditor_molecule"
       },
       "icon": "/modules/protothemeeditor/views/img/types/container.svg",
-      "type": "Container",
-      "id": 24
+      "label": "Container",
+      "type": "container",
+      "id": 24,
+      "idParent": null,
+      "childrenTypes": ["row"]
     },
     "isExpanded": true,
     "children": [{
@@ -106,16 +109,15 @@
           "view": "https://prestashop178.denys.tot/bb/index.php?controller=AdminProtothemeeditorLocationMolecule&token=2df320a8d017cd4713eda359e69d6ed9&id_molecule=25&viewprotothemeeditor_molecule"
         },
         "icon": "/modules/protothemeeditor/views/img/types/row.svg",
-        "type": "Ligne",
-        "id": 25
+        "label": "Ligne",
+        "type": "row",
+        "id": 25,
+        "idParent": 24,
+        "childrenTypes": ["col"]
       },
       "isExpanded": true,
       "children": [{
-        "title": "12/12 (taille normale)",
-        "isLeaf": false,
-        "isSelectable": true,
-        "isDraggable": true,
-        "data": {
+        "title": "12/12 (taille normale)", "isLeaf": false, "isSelectable": true, "isDraggable": true, "data": {
           "active": true,
           "links": {
             "add": "https://prestashop178.denys.tot/bb/index.php?controller=AdminProtothemeeditorLocationMolecule&token=2df320a8d017cd4713eda359e69d6ed9&id_parent=26&addprotothemeeditor_molecule&id_root=24",
@@ -124,11 +126,12 @@
             "view": "https://prestashop178.denys.tot/bb/index.php?controller=AdminProtothemeeditorLocationMolecule&token=2df320a8d017cd4713eda359e69d6ed9&id_molecule=26&viewprotothemeeditor_molecule"
           },
           "icon": "/modules/protothemeeditor/views/img/types/default.svg",
-          "type": "Colonne",
-          "id": 26
-        },
-        "isExpanded": true,
-        "children": [{
+          "label": "Colonne",
+          "type": "col",
+          "id": 26,
+          "idParent": 25,
+          "childrenTypes": ["accordeon", "alert", "banner", "carousel", "container", "html_content", "dropdown", "funnel_link", "image", "interstitial", "link", "row", "blog_post_list", "category_list", "link_list", "manufacturer_list", "custom_list", "product_list", "megamenu", "mobile_menu", "category_miniature", "product_miniature", "modal", "tabjs", "separator", "title", "topic_link", "video", "widget", "common_widget"]
+        }, "isExpanded": true, "children": [{
           "title": "carousel_27",
           "isLeaf": false,
           "isSelectable": true,
@@ -142,10 +145,13 @@
               "view": "https://prestashop178.denys.tot/bb/index.php?controller=AdminProtothemeeditorLocationMolecule&token=2df320a8d017cd4713eda359e69d6ed9&id_molecule=27&viewprotothemeeditor_molecule"
             },
             "icon": "/modules/protothemeeditor/views/img/types/carousel.svg",
-            "type": "Carrousel",
-            "id": 27
+            "label": "Carrousel",
+            "type": "carousel",
+            "id": 27,
+            "idParent": 26,
+            "childrenTypes": ["carousel_slide"]
           },
-          "isExpanded": false,
+          "isExpanded": true,
           "children": [{
             "title": "Flexible Atomic Suite",
             "isLeaf": true,
@@ -160,8 +166,11 @@
                 "view": "https://prestashop178.denys.tot/bb/index.php?controller=AdminProtothemeeditorLocationMolecule&token=2df320a8d017cd4713eda359e69d6ed9&id_molecule=28&viewprotothemeeditor_molecule"
               },
               "icon": "/modules/protothemeeditor/views/img/types/default.svg",
-              "type": "Slide",
-              "id": 28
+              "label": "Slide",
+              "type": "carousel_slide",
+              "id": 28,
+              "idParent": 27,
+              "childrenTypes": []
             }
           }, {
             "title": "Efficience",
@@ -177,11 +186,13 @@
                 "view": "https://prestashop178.denys.tot/bb/index.php?controller=AdminProtothemeeditorLocationMolecule&token=2df320a8d017cd4713eda359e69d6ed9&id_molecule=29&viewprotothemeeditor_molecule"
               },
               "icon": "/modules/protothemeeditor/views/img/types/default.svg",
-              "type": "Slide",
-              "id": 29
+              "label": "Slide",
+              "type": "carousel_slide",
+              "id": 29,
+              "idParent": 27,
+              "childrenTypes": []
             }
-          }],
-          "isSelected": false
+          }]
         }, {
           "title": "Produits sur mesure",
           "isLeaf": true,
@@ -196,8 +207,11 @@
               "view": "https://prestashop178.denys.tot/bb/index.php?controller=AdminProtothemeeditorLocationMolecule&token=2df320a8d017cd4713eda359e69d6ed9&id_molecule=30&viewprotothemeeditor_molecule"
             },
             "icon": "/modules/protothemeeditor/views/img/types/title.svg",
-            "type": "Titre",
-            "id": 30
+            "label": "Titre",
+            "type": "title",
+            "id": 30,
+            "idParent": 26,
+            "childrenTypes": []
           }
         }, {
           "title": "Sélection manuelle de produits",
@@ -213,8 +227,11 @@
               "view": "https://prestashop178.denys.tot/bb/index.php?controller=AdminProtothemeeditorLocationMolecule&token=2df320a8d017cd4713eda359e69d6ed9&id_molecule=31&viewprotothemeeditor_molecule"
             },
             "icon": "/modules/protothemeeditor/views/img/types/product_list.svg",
-            "type": "Liste de produits",
-            "id": 31
+            "label": "Liste de produits",
+            "type": "product_list",
+            "id": 31,
+            "idParent": 26,
+            "childrenTypes": []
           }
         }, {
           "title": "Catégories populaires",
@@ -230,8 +247,11 @@
               "view": "https://prestashop178.denys.tot/bb/index.php?controller=AdminProtothemeeditorLocationMolecule&token=2df320a8d017cd4713eda359e69d6ed9&id_molecule=32&viewprotothemeeditor_molecule"
             },
             "icon": "/modules/protothemeeditor/views/img/types/title.svg",
-            "type": "Titre",
-            "id": 32
+            "label": "Titre",
+            "type": "title",
+            "id": 32,
+            "idParent": 26,
+            "childrenTypes": []
           }
         }, {
           "title": "ID: 3, 4, 5, 6, 7, 8",
@@ -247,8 +267,11 @@
               "view": "https://prestashop178.denys.tot/bb/index.php?controller=AdminProtothemeeditorLocationMolecule&token=2df320a8d017cd4713eda359e69d6ed9&id_molecule=33&viewprotothemeeditor_molecule"
             },
             "icon": "/modules/protothemeeditor/views/img/types/category_list.svg",
-            "type": "Liste de catégories",
-            "id": 33
+            "label": "Liste de catégories",
+            "type": "category_list",
+            "id": 33,
+            "idParent": 26,
+            "childrenTypes": []
           }
         }, {
           "title": " Toutes les categories  keyboard_arrow_right  ",
@@ -264,11 +287,13 @@
               "view": "https://prestashop178.denys.tot/bb/index.php?controller=AdminProtothemeeditorLocationMolecule&token=2df320a8d017cd4713eda359e69d6ed9&id_molecule=34&viewprotothemeeditor_molecule"
             },
             "icon": "/modules/protothemeeditor/views/img/types/html_content.svg",
-            "type": "Contenu HTML",
-            "id": 34
+            "label": "Contenu HTML",
+            "type": "html_content",
+            "id": 34,
+            "idParent": 26,
+            "childrenTypes": []
           }
-        }],
-        "isSelected": false
+        }]
       }]
     }]
   }];

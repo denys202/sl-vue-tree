@@ -707,6 +707,20 @@ export default {
       return !shouldStop ? nodes : false;
     },
 
+    getParentNode(path) {
+      if (!path) {
+        return null;
+      }
+
+      if (path.length <= 1) {
+        return null;
+      }
+
+      const parentPath = path.slice(0, -1)
+
+      return this.getNode(parentPath);
+    },
+
     traverseModels(cb, nodeModels) {
       let i = nodeModels.length;
       while (i--) {
