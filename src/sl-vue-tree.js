@@ -2,7 +2,7 @@
 export default {
   name: 'sl-vue-tree',
   props: {
-    value: {
+    modelValue: {
       type: Array,
       default: () => []
     },
@@ -65,7 +65,7 @@ export default {
       isDragging: false,
       lastMousePos: {x: 0, y: 0},
       preventDrag: false,
-      currentValue: this.value
+      currentValue: this.modelValue
     };
   },
 
@@ -622,6 +622,10 @@ export default {
       this.updateNode(node.path, { isExpanded: !node.isExpanded });
       this.emitToggle(node, event);
       event.stopPropagation();
+    },
+
+    onDragendHandler() {
+
     },
 
     stopDrag() {

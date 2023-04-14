@@ -1,5 +1,6 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const {VueLoaderPlugin} = require('vue-loader');
 
 module.exports = {
   entry: {
@@ -41,7 +42,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.(png|jpe?g|gif|svg|mp4|ico|wav)(\?.*)?$/,
@@ -66,6 +67,7 @@ module.exports = {
   },
 
   plugins: [
+    new VueLoaderPlugin(),
     new CopyWebpackPlugin([
       { from: 'src/*.css', to: '[name].css'},
       { from: 'src/*.d.ts', to: '[name].ts'}

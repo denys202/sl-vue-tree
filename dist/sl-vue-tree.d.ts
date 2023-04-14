@@ -1,4 +1,6 @@
-import Vue from 'vue';
+import Vue, {DefineComponent} from 'vue';
+import {Component} from "vue";
+
 export interface ISlTreeNodeModel<TDataType> {
     title: string;
     isLeaf?: boolean;
@@ -27,7 +29,7 @@ export interface IVueData<TDataType> {
     rootCursorPosition: ICursorPosition<TDataType>;
     rootDraggingNode: ISlTreeNode<TDataType>;
 }
-export default class SlVueTree<TDataType> extends Vue {
+export default class SlVueTree<TDataType> {
     value: ISlTreeNodeModel<TDataType>[];
     edgeSize: number;
     allowMultiselect: boolean;
