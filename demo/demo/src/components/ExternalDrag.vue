@@ -5,12 +5,12 @@
     <div class="row">
         <div class="tree-container">
             <sl-vue-tree
-                    v-model="nodes"
+                    :model-value="nodes"
                     ref="slVueTree"
                     @externaldrop="onExternalDropHandler"
             >
 
-                <template slot="title" slot-scope="{ node }">
+                <template #title="{ node }">
           <span class="item-icon">
             <i class="fa fa-file" v-if="node.isLeaf"></i>
             <i class="fa fa-folder" v-if="!node.isLeaf"></i>
@@ -20,7 +20,7 @@
                 </template>
 
 
-                <template slot="toggle" slot-scope="{ node }">
+                <template #toggle="{ node }">
           <span v-if="!node.isLeaf">
             <i v-if="node.isExpanded" class="fa fa-chevron-down"></i>
             <i v-if="!node.isExpanded" class="fa fa-chevron-right"></i>

@@ -1,6 +1,6 @@
 {
   "name": "sl-vue-tree-atomic",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "draggable tree vue component",
   "browserslist": "> 0.25%, not dead",
   "main": "dist/sl-vue-tree.js",
@@ -28,7 +28,7 @@
     "rimraf": "^2.6.2",
     "vue": "^3.2.47",
     "vue-loader": "^17.0.1",
-    "vue-template-compiler": "^2.7.14",
+    "@vue/compiler-sfc": "^3.2.6",
     "webpack": "^4.42.0",
     "webpack-cli": "^3.1.2"
   },

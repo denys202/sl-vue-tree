@@ -1,4 +1,3 @@
-
 export default {
   name: 'sl-vue-tree',
   props: {
@@ -37,7 +36,7 @@ export default {
       validator: function (value) {
         let allowedKeys = ['ctrlKey', 'metaKey', 'altKey'];
         let multiselectKeys = Array.isArray(value) ? value : [value];
-        multiselectKeys = multiselectKeys.filter(keyName => allowedKeys.indexOf(keyName ) !== -1);
+        multiselectKeys = multiselectKeys.filter(keyName => allowedKeys.indexOf(keyName) !== -1);
         return !!multiselectKeys.length;
       }
     },
@@ -75,13 +74,16 @@ export default {
     }
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     document.removeEventListener('mouseup', this.onDocumentMouseupHandler);
   },
 
   watch: {
-    modelValue: function (newValue) {
-      this.currentValue = newValue;
+    modelValue: {
+      handler(newValue) {
+        this.currentValue = newValue;
+      },
+      deep: true
     }
   },
 
@@ -104,9 +106,9 @@ export default {
       return this.getParent().nodes[this.parentInd].children;
     },
     /**
-   * gaps is using for nodes indentation
-   * @returns {number[]}
-   */
+     * gaps is using for nodes indentation
+     * @returns {number[]}
+     */
     gaps() {
       const gaps = [];
       let i = this.level - 1;
@@ -257,10 +259,10 @@ export default {
 
     select(path, addToSelection = false, event = null) {
       const multiselectKeys = Array.isArray(this.multiselectKey) ?
-        this.multiselectKey:
+        this.multiselectKey :
         [this.multiselectKey];
       const multiselectKeyIsPressed = event && !!multiselectKeys.find(key => event[key]);
-      addToSelection = (multiselectKeyIsPressed || addToSelection) && this.allowMultiselect ;
+      addToSelection = (multiselectKeyIsPressed || addToSelection) && this.allowMultiselect;
 
       const selectedNode = this.getNode(path);
       if (!selectedNode) return null;
@@ -306,9 +308,9 @@ export default {
       const initialDraggingState = this.isDragging;
       const isDragging =
         this.isDragging || (
-        this.mouseIsDown &&
-        (this.lastMousePos.x !== event.clientX || this.lastMousePos.y !== event.clientY)
-      );
+          this.mouseIsDown &&
+          (this.lastMousePos.x !== event.clientX || this.lastMousePos.y !== event.clientY)
+        );
 
       const isDragStarted = initialDraggingState === false && isDragging === true;
 
@@ -322,7 +324,7 @@ export default {
       const $root = this.getRoot().$el;
       const rootRect = $root.getBoundingClientRect();
       const $dragInfo = this.$refs.dragInfo;
-      const dragInfoTop = (event.clientY - rootRect.top + $root.scrollTop - ($dragInfo.style.marginBottom | 0) );
+      const dragInfoTop = (event.clientY - rootRect.top + $root.scrollTop - ($dragInfo.style.marginBottom | 0));
       const dragInfoLeft = (event.clientX - rootRect.left);
 
       $dragInfo.style.top = dragInfoTop + 'px';
@@ -344,7 +346,7 @@ export default {
 
       this.isDragging = isDragging;
 
-      this.setCursorPosition({ node: destNode, placement });
+      this.setCursorPosition({node: destNode, placement});
 
       // couldBeChild
       const scrollBottomLine = rootRect.bottom - this.scrollAreaHeight;
@@ -397,7 +399,7 @@ export default {
         }
       }
 
-      return { node: destNode, placement };
+      return {node: destNode, placement};
     },
 
     getClosetElementWithPath($el) {
@@ -411,9 +413,9 @@ export default {
       const $root = this.getRoot().$el;
       const rootRect = $root.getBoundingClientRect();
       if (event.clientY >= rootRect.bottom) {
-        this.setCursorPosition({ node: this.nodes.slice(-1)[0], placement: 'after' });
+        this.setCursorPosition({node: this.nodes.slice(-1)[0], placement: 'after'});
       } else if (event.clientY < rootRect.top) {
-        this.setCursorPosition({ node: this.getFirstNode(), placement: 'before'});
+        this.setCursorPosition({node: this.getFirstNode(), placement: 'before'});
       }
     },
 
@@ -422,7 +424,7 @@ export default {
     },
 
     getLastNode() {
-      let lastNode  = null;
+      let lastNode = null;
       this.traverse((node) => {
         lastNode = node;
       });
@@ -586,16 +588,16 @@ export default {
       this.emitBeforeDrop(draggingNodes, this.cursorPosition, () => cancelled = true);
 
       if (cancelled) {
-          this.stopDrag();
-          return;
+        this.stopDrag();
+        return;
       }
 
       const nodeModelsToInsert = [];
 
       // mark dragging model to delete
       for (let draggingNodeModel of nodeModelsSubjectToInsert) {
-          nodeModelsToInsert.push(this.copy(draggingNodeModel));
-          draggingNodeModel['_markToDelete'] = true;
+        nodeModelsToInsert.push(this.copy(draggingNodeModel));
+        draggingNodeModel['_markToDelete'] = true;
       }
 
       // insert dragging nodes to the new place
@@ -619,7 +621,7 @@ export default {
     onToggleHandler(event, node) {
       if (!this.allowToggleBranch) return;
 
-      this.updateNode(node.path, { isExpanded: !node.isExpanded });
+      this.updateNode(node.path, {isExpanded: !node.isExpanded});
       this.emitToggle(node, event);
       event.stopPropagation();
     },
@@ -738,7 +740,7 @@ export default {
     remove(paths) {
       const pathsStr = paths.map(path => JSON.stringify(path));
       const newNodes = this.copy(this.currentValue);
-      this.traverse( (node, nodeModel, siblings) => {
+      this.traverse((node, nodeModel, siblings) => {
         for (const pathStr of pathsStr) {
           if (node.pathStr === pathStr) nodeModel._markToDelete = true;
         }
