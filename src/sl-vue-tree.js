@@ -80,7 +80,7 @@ export default {
   },
 
   watch: {
-    value: function (newValue) {
+    modelValue: function (newValue) {
       this.currentValue = newValue;
     }
   },

@@ -63,7 +63,16 @@ export default {
   components: {SlVueTree},
   data: function () {
     return {
-      nodes: [
+      nodes: [],
+    }
+  },
+
+  mounted() {
+    const self = this;
+    // expose instance to the global namespace for better debugging
+    window.slVueTree = this.$refs.slVueTree;
+    setTimeout(() => {
+      self.nodes = [
         {title: 'Item1', isLeaf: true},
         {title: 'Item2', isLeaf: true},
         {
@@ -79,12 +88,7 @@ export default {
         },
         {title: 'Item6', isLeaf: true}
       ]
-    }
-  },
-
-  mounted() {
-    // expose instance to the global namespace for better debugging
-    window.slVueTree = this.$refs.slVueTree;
+    }, 1000);
 
   },
 

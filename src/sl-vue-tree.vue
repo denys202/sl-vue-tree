@@ -6,9 +6,11 @@
       @mouseleave="onMouseleaveHandler"
       @dragend="onDragendHandler(null, $event)"
   >
-    <div ref="nodes" class="sl-vue-tree-nodes-list">
+    <div ref="nodesRef" class="sl-vue-tree-nodes-list">
       <div
-          class="sl-vue-tree-node" v-for="(node, nodeInd) in nodes"
+          class="sl-vue-tree-node"
+          v-for="(node, nodeInd) in nodes"
+          :key="nodeInd"
           :class="{'sl-vue-tree-selected': node.isSelected, 'sl-vue-tree-is-dragging': node.isSelected && getRoot().isDragging }"
       >
         <div
@@ -49,7 +51,9 @@
             'sl-vue-tree-node-is-folder' : !node.isLeaf
           }"
         >
-          <div class="sl-vue-tree-gap" v-for="gapInd in gaps"></div>
+          <div class="sl-vue-tree-gap"
+               :key="gapInd"
+               v-for="gapInd in gaps"></div>
 
           <div class="sl-vue-tree-branch" v-if="level && showBranches">
             <slot name="branch" :node="node">
@@ -86,7 +90,7 @@
 
         <sl-vue-tree
             v-if="node.children && node.children.length && node.isExpanded"
-            :value="node.children"
+            v-model="node.children"
             :level="node.level"
             :parentInd="nodeInd"
             :allowMultiselect="allowMultiselect"

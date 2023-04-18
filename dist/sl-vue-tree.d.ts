@@ -48,6 +48,7 @@ export default class SlVueTree<TDataType> {
     getNextNode(path: number[], filter?: (node: ISlTreeNode<TDataType>) => boolean): ISlTreeNode<TDataType>;
     getPrevNode(path: number[], filter?: (node: ISlTreeNode<TDataType>) => boolean): ISlTreeNode<TDataType>;
     getParentNode(path: number[]): ISlTreeNode<TDataType>;
+    checkNodeIsParent(sourceNode: ISlTreeNodeModel<TDataType>, destNode: ISlTreeNodeModel<TDataType>): ISlTreeNode<TDataType>;
     updateNode(path: number[], patch: Partial<ISlTreeNodeModel<TDataType>>): void;
     getSelected(): ISlTreeNode<TDataType>[];
     traverse(cb: (node: ISlTreeNode<TDataType>, nodeModel: ISlTreeNodeModel<TDataType>, siblings: ISlTreeNodeModel<TDataType>[]) => boolean | void, nodeModels?: ISlTreeNodeModel<TDataType>[], parentPath?: number[]): ISlTreeNode<TDataType>[] | boolean;
